@@ -1,0 +1,47 @@
+package frc.robot.subsystems;
+
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class SwerveSubsystem extends SubsystemBase {
+    double trackWidth = Units.inchesToMeters(22.5 / 2.0);
+    SwerveDriveKinematics kinematics = new SwerveDriveKinematics(
+
+            new Translation2d[]{
+                    new Translation2d(trackWidth, trackWidth),
+                    new Translation2d(trackWidth, -trackWidth),
+                    new Translation2d(-trackWidth, trackWidth),
+                    new Translation2d(-trackWidth, -trackWidth)
+            }
+    );
+
+    SwerveModule rearLeft = new SwerveModule(34, 11, 21, -2.41, "rearLeft");
+    SwerveModule rearRight = new SwerveModule(32, 13, 23, -0.51, "rearRight");
+    SwerveModule frontLeft = new SwerveModule(33, 10, 20, 1.35, "frontLeft");
+    SwerveModule frontRight = new SwerveModule(31, 12, 22, 1.42, "frontRight");
+
+    public SwerveSubsystem() {
+    }
+
+    public void drive(double x, double y, double rot) {
+        SwerveModuleState[] states = kinematics.toSwerveModuleStates(new ChassisSpeeds(x, y, rot));
+        frontLeft.setState(states[0]);
+        frontRight.setState(states[1]);
+        rearLeft.setState(states[2]);
+        rearRight.setState(states[3]);
+
+    }
+
+    @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
+        drive(0,0,0.5);
+
+    }
+}
+
+
