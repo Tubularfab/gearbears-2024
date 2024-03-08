@@ -99,7 +99,9 @@ public class RobotContainer {
     ).handleInterrupt(() -> {m_shooter.setShooterSpeed(0);}));
     buttonEleven.whileTrue(m_intake.getRunIntakeCommand());
     buttonNine.whileTrue(m_shooter.getSlowShootCommand());
-    buttonTwelve.whileTrue(m_intake.getRunOutakeCommand());
+    buttonTwelve.whileTrue(new ParallelCommandGroup(
+      m_shooter.getRunReverseShooter(),
+      m_intake.getRunOutakeCommand()));
 
   }
 
