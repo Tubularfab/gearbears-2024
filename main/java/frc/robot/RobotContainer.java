@@ -135,8 +135,8 @@ public class RobotContainer {
                   // m_intake.getRunIntakeCommand().withTimeout(2.75),
                   swerveSubsystem.getDriveStraightCommand(.3), 
                   m_intake.getRunIntakeCommand()
-                ).withTimeout(2.75),
-                swerveSubsystem.getDriveStraightCommand(-.3).withTimeout(2.75)
+                ).withTimeout(1.5),
+                swerveSubsystem.getDriveStraightCommand(-.3).withTimeout(1.5)
                 // new WaitCommand(.50),
                 // m_shooter.getStartShooterCommand()
 
