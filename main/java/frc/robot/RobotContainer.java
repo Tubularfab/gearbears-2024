@@ -123,14 +123,15 @@ public class RobotContainer {
       // );
 
             return new SequentialCommandGroup(
-              m_shooter.getStartShooterCommand(),
+                m_shooter.getStartShooterCommand(),
+                new WaitCommand(.50),
 
-
-        new WaitCommand(.50),
-
-        m_intake.getRunIntakeCommand().withTimeout(.5),
-        m_shooter.getStopCommand()
-      );
+                m_intake.getRunIntakeCommand().withTimeout(.5),
+                m_shooter.getStopCommand(),
+                swerveSubsystem.getDriveStraightCommand(.3).withTimeout(2)
+            );
+        
+        // new swerveSubsystem.setDefaultCommand(new RunCommand(()-> swerveSubsystem.drive(driver.getX(), (-driver.getY(3)), (-driver.getZ())), swerveSubsystem));
 
 
 
