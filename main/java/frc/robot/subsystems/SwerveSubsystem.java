@@ -5,6 +5,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SwerveSubsystem extends SubsystemBase {
@@ -105,6 +106,14 @@ public class SwerveSubsystem extends SubsystemBase {
         // This method will be called once per scheduler run
         //drive(0,0,0.5); //commented out to cut down on steering changes
 
+    }
+
+    public Command getDriveStraightCommand(double speed) {
+        return this.runEnd(() -> {
+            this.drive(0, speed, 0);
+        }, () -> {
+            this.drive(0, 0, 0);
+        });
     }
 }
 
