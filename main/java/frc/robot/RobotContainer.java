@@ -99,7 +99,9 @@ public class RobotContainer {
     ).handleInterrupt(() -> {m_shooter.setShooterSpeed(0);}));
     buttonEleven.whileTrue(m_intake.getRunIntakeCommand());
     buttonNine.whileTrue(m_shooter.getSlowShootCommand());
-    buttonTwelve.whileTrue(m_intake.getRunOutakeCommand());
+    buttonTwelve.whileTrue(new ParallelCommandGroup(
+      m_shooter.getRunReverseShooter(),
+      m_intake.getRunOutakeCommand()));
 
   }
 
@@ -123,16 +125,26 @@ public class RobotContainer {
       // );
 
             return new SequentialCommandGroup(
-              m_shooter.getStartShooterCommand(),
+                m_shooter.getStartShooterCommand(),
+                new WaitCommand(.50),
 
+                m_intake.getRunIntakeCommand().withTimeout(.5),
+                m_shooter.getStopCommand(),
+                new ParallelCommandGroup(
+                  // swerveSubsystem.getDriveStraightCommand(.3).withTimeout(2.75), 
+                  // m_intake.getRunIntakeCommand().withTimeout(2.75),
+                  swerveSubsystem.getDriveStraightCommand(.3), 
+                  m_intake.getRunIntakeCommand()
+                ).withTimeout(2.75),
+                swerveSubsystem.getDriveStraightCommand(-.3).withTimeout(2.75)
+                // new WaitCommand(.50),
+                // m_shooter.getStartShooterCommand()
 
-        new WaitCommand(.50),
+            );
+        
+        // new swerveSubsystem.setDefaultCommand(new RunCommand(()-> swerveSubsystem.drive(driver.getX(), (-driver.getY(3)), (-driver.getZ())), swerveSubsystem));
 
-        m_intake.getRunIntakeCommand().withTimeout(.5),
-        m_shooter.getStopCommand()
-      );
-
-
+      // pathplanner - tool to review math & trajectories
 
   } // end getAutonomousCommand
 

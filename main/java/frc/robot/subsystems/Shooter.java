@@ -45,9 +45,17 @@ public class Shooter extends SubsystemBase {
   }
    public Command getSlowShootCommand() {
     return this.startEnd(() -> {
-      this.setShooterSpeed(.12);
+      this.setShooterSpeed(.06);
     }, () -> {
       this.setShooterSpeed(0);
     });
-  }}
+  }
+ public Command getRunReverseShooter() {
+    return this.startEnd(() -> {
+      this.setShooterSpeed(-.10);
+    }, () -> {
+      this.setShooterSpeed(0);
+    });
+  }
+}
 
