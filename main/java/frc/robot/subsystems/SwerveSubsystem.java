@@ -101,6 +101,22 @@ public class SwerveSubsystem extends SubsystemBase {
 
     }
 
+    public void drive_no_deadband(double x, double y, double rot) {
+ 
+        double mod_x;
+        double mod_y;
+        double mod_z;
+
+        SwerveModuleState[] states = kinematics.toSwerveModuleStates(new ChassisSpeeds(x, y, z));
+
+        frontLeft.setState(states[2]);
+        frontRight.setState(states[0]);
+        rearLeft.setState(states[3]);
+        rearRight.setState(states[1]);
+
+
+    }
+
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
@@ -111,7 +127,7 @@ public class SwerveSubsystem extends SubsystemBase {
     public Command getDriveStraightCommand(double speed) {
         return this.runEnd(
             () -> {
-                this.drive(0, speed, 0);
+                this.drive_no_deadband(0, speed, 0);
             }, 
             () -> {
                 this.drive(0, 0, 0);

@@ -115,17 +115,8 @@ public class RobotContainer {
     */
     //private void getAutonomousCommand() {
     public Command getAutonomousCommand() {
-        // An example command will be run in autonomous
 
-        // return new SequentialCommandGroup(
-        //   new ParallelCommandGroup(
-        //   m_shooter.getShooterCommand(),
-        //   m_intake.getRunIntakeCommand()),
 
-        //   new WaitCommand(1),
-
-        //   new ParallelCommandGroup(m_shooter.getStopCommand(), m_intake.getStopCommand())
-        // );
 
         return new SequentialCommandGroup(
             m_shooter.getStartShooterCommand(),
