@@ -124,11 +124,11 @@ public class RobotContainer {
 
             m_intake.getRunIntakeCommand().withTimeout(.5),
             m_shooter.getStopCommand(),
-            swerveSubsystem.getDriveStraightCommand(.2).withTimeout(2),
+            swerveSubsystem.getDriveStraightCommand(.25).withTimeout(2),
             new ParallelCommandGroup(
             
-                swerveSubsystem.getDriveStraightCommand(.2).withTimeout(2), 
-                m_intake.getRunIntakeCommand().withTimeout(2)
+                swerveSubsystem.getDriveStraightCommand(.25).withTimeout(2.7), 
+                m_intake.getRunIntakeCommand().withTimeout(2.7)
                 
                 // swerveSubsystem.getDriveStraightCommand(.3), 
                 // m_intake.getRunIntakeCommand()
@@ -137,7 +137,7 @@ public class RobotContainer {
             //).withTimeout(1.5),
              new ParallelCommandGroup(
             
-                swerveSubsystem.getDriveStraightCommand(-.2).withTimeout(4.1), 
+                swerveSubsystem.getDriveStraightCommand(-.25).withTimeout(4.7), 
                 m_intake.getRunIntakeCommand().withTimeout(1)
                 
                 // swerveSubsystem.getDriveStraightCommand(.3), 
