@@ -103,11 +103,11 @@ public class SwerveSubsystem extends SubsystemBase {
 
     public void drive_no_deadband(double x, double y, double rot) {
  
-        double mod_x;
-        double mod_y;
-        double mod_z;
+        //double mod_x;
+        //double mod_y;
+        //double mod_z;
 
-        SwerveModuleState[] states = kinematics.toSwerveModuleStates(new ChassisSpeeds(x, y, z));
+        SwerveModuleState[] states = kinematics.toSwerveModuleStates(new ChassisSpeeds(x, y, rot));
 
         frontLeft.setState(states[2]);
         frontRight.setState(states[0]);
