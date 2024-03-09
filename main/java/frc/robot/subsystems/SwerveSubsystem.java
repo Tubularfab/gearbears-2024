@@ -107,6 +107,10 @@ public class SwerveSubsystem extends SubsystemBase {
         //double mod_y;
         //double mod_z;
 
+        x = x * -1;
+        y = y * -1;
+        rot = rot * -1;
+
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(new ChassisSpeeds(x, y, rot));
 
         frontLeft.setState(states[2]);

@@ -124,20 +124,30 @@ public class RobotContainer {
 
             m_intake.getRunIntakeCommand().withTimeout(.5),
             m_shooter.getStopCommand(),
+            swerveSubsystem.getDriveStraightCommand(.2).withTimeout(2),
             new ParallelCommandGroup(
             
-                swerveSubsystem.getDriveStraightCommand(.4).withTimeout(2.75), 
-                m_intake.getRunIntakeCommand().withTimeout(2.75)
+                swerveSubsystem.getDriveStraightCommand(.2).withTimeout(2), 
+                m_intake.getRunIntakeCommand().withTimeout(2)
                 
                 // swerveSubsystem.getDriveStraightCommand(.3), 
                 // m_intake.getRunIntakeCommand()
             
             ),
             //).withTimeout(1.5),
+             new ParallelCommandGroup(
             
-            swerveSubsystem.getDriveStraightCommand(-.4).withTimeout(1.5)
-            // new WaitCommand(.50),
-            // m_shooter.getStartShooterCommand()
+                swerveSubsystem.getDriveStraightCommand(-.2).withTimeout(4.1), 
+                m_intake.getRunIntakeCommand().withTimeout(1)
+                
+                // swerveSubsystem.getDriveStraightCommand(.3), 
+                // m_intake.getRunIntakeCommand()
+            
+            ),
+           // swerveSubsystem.getDriveStraightCommand(-.2).withTimeout(4),
+            new WaitCommand(.50),
+            m_shooter.getStartShooterCommand(),
+            m_intake.getRunIntakeCommand().withTimeout(3)
 
             );
 
