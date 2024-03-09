@@ -153,8 +153,6 @@ public class RobotContainer {
         ),
             
             m_shooter.getStartShooterCommand(),
-             new WaitCommand(.50),
-
              m_intake.getRunIntakeCommand().withTimeout(2),
              m_shooter.getStopCommand()
 
