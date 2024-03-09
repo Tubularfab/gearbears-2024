@@ -119,37 +119,44 @@ public class RobotContainer {
 
 
         return new SequentialCommandGroup(
-            m_shooter.getStartShooterCommand(),
-            new WaitCommand(.50),
+             m_shooter.getStartShooterCommand(),
+             new WaitCommand(.50),
 
-            m_intake.getRunIntakeCommand().withTimeout(.5),
-            m_shooter.getStopCommand(),
-            swerveSubsystem.getDriveStraightCommand(.25).withTimeout(2),
-            new ParallelCommandGroup(
-            
-                swerveSubsystem.getDriveStraightCommand(.25).withTimeout(2.7), 
-                m_intake.getRunIntakeCommand().withTimeout(2.7)
-                
-                // swerveSubsystem.getDriveStraightCommand(.3), 
-                // m_intake.getRunIntakeCommand()
-            
-            ),
-            //).withTimeout(1.5),
+             m_intake.getRunIntakeCommand().withTimeout(.5),
+             m_shooter.getStopCommand(),
+             swerveSubsystem.getDriveStraightCommand(.25).withTimeout(2),
              new ParallelCommandGroup(
             
-                swerveSubsystem.getDriveStraightCommand(-.25).withTimeout(4.7), 
-                m_intake.getRunIntakeCommand().withTimeout(1)
+                 swerveSubsystem.getDriveStraightCommand(.25).withTimeout(2.7), 
+                 m_intake.getRunIntakeCommand().withTimeout(2.7)
+                
+                 //swerveSubsystem.getDriveStraightCommand(.3), 
+                 //m_intake.getRunIntakeCommand()
+            
+        
+            ),
+            //  new ParallelCommandGroup(
+            
+                 swerveSubsystem.getDriveStraightCommand(-.25).withTimeout(4.7), 
+                 m_intake.getRunIntakeCommand().withTimeout(1),
                 
                 // swerveSubsystem.getDriveStraightCommand(.3), 
                 // m_intake.getRunIntakeCommand()
             
-            ),
+            
            // swerveSubsystem.getDriveStraightCommand(-.2).withTimeout(4),
-            new WaitCommand(.50),
+            // new WaitCommand(.50),
+            new ParallelCommandGroup(
+                
+        m_shooter.getRunReverseShooter().withTimeout(1),
+        m_intake.getRunOutakeCommand().withTimeout(1)
+        ),
+            
             m_shooter.getStartShooterCommand(),
-            m_intake.getRunIntakeCommand().withTimeout(3)
-
+             m_intake.getRunIntakeCommand().withTimeout(2)
             );
+
+        
 
             
         
