@@ -100,6 +100,71 @@ public class SwerveSubsystem extends SubsystemBase {
 
     }
 
+    public void drive_no_deadband(double x, double y, double rot) {
+
+
+        // BEGIN GC MODS
+        //double Deadband_x;
+        //double Deadband_y;
+        //double Deadband_z;
+        
+        double mod_x;
+        double mod_y;
+        double mod_z;
+
+        //Deadband_x = 0.3;
+        //Deadband_y = 0.3;
+        //Deadband_z = 0.3;
+
+        //if( Math.abs(x) < Deadband_x ) {
+        //    mod_x = 0;
+        //} else {
+        //    mod_x = ( 1 / ( 1 - Deadband_x ) ) * ( x + ( -Sgn(x) * Deadband_x ) );
+        //}
+
+        //if( Math.abs(y) < Deadband_y ) {
+        //    mod_y = 0;
+        //} else {
+        //    mod_y = ( 1 / ( 1 - Deadband_y ) ) * ( y + ( -Sgn(y) * Deadband_y ) );
+        //    mod_y = 
+        //        ( 1 / ( 1 - Deadband_y ) ) 
+        //        * 
+        //        ( y + ( -Sgn(y) * Deadband_y ) );
+        //}
+
+        //if( Math.abs(rot) < Deadband_z ) {
+        //    mod_z = 0;
+        //} else {
+        //    mod_z = ( 1 / ( 1 - Deadband_z ) ) * ( rot + ( -Sgn(rot) * Deadband_z ) );
+        //}
+
+        SwerveModuleState[] states = kinematics.toSwerveModuleStates(new ChassisSpeeds(x, y, z));
+        //frontLeft.setState(states[0]);
+        //frontRight.setState(states[1]);
+        //rearLeft.setState(states[2]);
+        //rearRight.setState(states[3]);
+
+        frontLeft.setState(states[2]);
+        frontRight.setState(states[0]);
+        rearLeft.setState(states[3]);
+        rearRight.setState(states[1]);
+
+
+        // END GC MODS
+
+        /*
+        // ORIGINAL CODE
+        SwerveModuleState[] states = kinematics.toSwerveModuleStates(new ChassisSpeeds(x, y, rot));
+        frontLeft.setState(states[0]);
+        frontRight.setState(states[1]);
+        rearLeft.setState(states[2]);
+        rearRight.setState(states[3]);
+        */
+
+    }
+
+    
+
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
