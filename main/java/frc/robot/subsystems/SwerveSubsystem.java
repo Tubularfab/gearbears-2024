@@ -109,11 +109,14 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public Command getDriveStraightCommand(double speed) {
-        return this.runEnd(() -> {
-            this.drive(0, speed, 0);
-        }, () -> {
-            this.drive(0, 0, 0);
-        });
+        return this.runEnd(
+            () -> {
+                this.drive(0, speed, 0);
+            }, 
+            () -> {
+                this.drive(0, 0, 0);
+            }
+        );
     }
 }
 
