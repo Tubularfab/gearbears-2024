@@ -81,7 +81,7 @@ public class SwerveModule extends SubsystemBase {
     public void setState(SwerveModuleState state){
         SwerveModuleState.optimize(state, Rotation2d.fromRadians(getAngle()));
         setAngle(state.angle.getRadians());
-        setPower(state.speedMetersPerSecond / 1.5);
+        setPower(state.speedMetersPerSecond / 1.75);
     }
     public double getAngle(){
         return relativeEncoder.getPosition();
